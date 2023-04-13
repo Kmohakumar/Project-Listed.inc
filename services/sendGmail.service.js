@@ -136,7 +136,7 @@ class sendGmail {
       }
     }
   }
-
+  
   async addLabel(messageID, labelId) {
     try {
       const INBOXLABELID = "INBOX";
@@ -155,5 +155,6 @@ class sendGmail {
     }
   }
 }
-
+console.log("hi")
 module.exports = sendGmail;
+
