@@ -6,24 +6,26 @@ const sendMail = async (req, res) => {
     try {
         setInterval(async ()=>{
             const sendEmailInstance = new sendGmail();
-            const labelId = await sendEmailInstance.createLabel();
+            
             const emailIds = await sendEmailInstance.readEmails();
             console.log("********read email started********");
             console.log(emailIds);
             console.log("*********read email ended*******");
             const length = Object.keys(emailIds).length
             if (length==0){
-                res.json({"message":"No emails to send"})
+                console.log("no emails to send")
             }
             else{
             // console.log({"length":readEmail.length()})
             for (let key in emailIds) {
+                const labelId = await sendEmailInstance.createLabel();
                 await sendEmailInstance.sendMail(emailIds[key].messageId,emailIds[key].threadId);
                 await sendEmailInstance.addLabel(emailIds[key].messageId, labelId);
             }
-            res.json({ message: "message sent" });
+            console.log("email sent")
             } 
         }, 50000)
+        res.json({ message: "sendMail function has been executed"});
     } catch (error) {
     console.log(err);
     }

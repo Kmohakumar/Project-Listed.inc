@@ -5,7 +5,7 @@ const { OAuth2 } = google.auth;
 require('dotenv').config();
 
 
-function gmailAuth() {
+function gmailAuth() { 
   const oAuth2Client = new OAuth2(
     process.env.CLIENTID,
     process.env.CLIENTSECRET,
