@@ -4,6 +4,7 @@ const sendGmail = require("../services/sendGmail.service");
 
 const sendMail = async (req, res) => {
     try {
+        // this cron job can be implimented diffrently using step function so that we can increase our performance 
         setInterval(async ()=>{
             const sendEmailInstance = new sendGmail();
             
@@ -16,7 +17,6 @@ const sendMail = async (req, res) => {
                 console.log("no emails to send")
             }
             else{
-            // console.log({"length":readEmail.length()})
             for (let key in emailIds) {
                 const labelId = await sendEmailInstance.createLabel();
                 await sendEmailInstance.sendMail(emailIds[key].messageId,emailIds[key].threadId);
